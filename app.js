@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+var port = process.env.PORT || 8080;
+
 app.get('/',(req,res) => res.send('Hellow'));
 
 app.get('/api',(req,res) => {
@@ -13,4 +15,6 @@ app.get('/api',(req,res) => {
 	res.json(todoList);
 });
 
-app.listen(3000, () => console.log('port 3000 use'));
+app.listen(
+	port, () => console.log('port use')
+);
