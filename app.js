@@ -46,6 +46,17 @@ app.post('/api/post',(req,res) => {
 	res.json(todoItem);
 });
 
+app.delete('/api/delete/:id',(req,res) => {
+	const index = todoList.findIndex((item) => item.id === req.params.id);
+
+	if(index >= 0){
+		const deleted = todoList.splice(index,1);
+		console.log(JSON.stringify(deleted[0]));
+	}
+
+	res.sendStatus(200);
+})
+
 app.listen(
 	port, () => console.log('port use')
 );
