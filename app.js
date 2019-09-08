@@ -10,7 +10,7 @@ const todoList = [];
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET", "PUT", "POST", "DELETE", "OPTIONS");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
@@ -53,6 +53,22 @@ app.delete('/api/delete/:id',(req,res) => {
 	if(index >= 0){
 		const deleted = todoList.splice(index,1);
 		console.log(JSON.stringify(deleted[0]));
+	}
+
+	res.sendStatus(200);
+});
+
+app.put('/api/put/:id',(req,res) => {
+	const index = todoList.findIndex((item) => item.id === req.params.id);
+
+	console.log(index);
+	
+	if(index >=0){
+		const item = todoList[index];
+		if(req.body.done){
+			item.done = req.body.done === 'true';
+		}
+		console.log(JSON.stringify(item));
 	}
 
 	res.sendStatus(200);
